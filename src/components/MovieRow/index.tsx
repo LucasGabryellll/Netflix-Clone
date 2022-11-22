@@ -6,12 +6,17 @@ import { Movie } from "../../@types/@TypeMovie";
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
+import ReactPlayer from 'react-player';
+
 export default function MovieRow({ title, items }: Movie) {
   const [scrollX, setScrollX] = useState(0);
+  const [trailerUrl, setTrailerUrl] = useState('');
+
+  const movieTrailer = require('movie-trailer');
 
   function handleLeftArrow() {
     let x = scrollX + Math.round(window.innerWidth / 2);
-    if(x > 0) {
+    if (x > 0) {
       x = 0;
     }
 
@@ -22,11 +27,26 @@ export default function MovieRow({ title, items }: Movie) {
     let x = scrollX - Math.round(window.innerWidth / 2);
     let listW = items?.results.length * 150;
 
-    if((window.innerWidth - listW) > x) {
-      x = ( window.innerWidth - listW) - 60;
+    if ((window.innerWidth - listW) > x) {
+      x = (window.innerWidth - listW) - 60;
     }
 
     setScrollX(x);
+  }
+
+  async function handleOnClick(movie: any) {
+    if (trailerUrl) {
+      setTrailerUrl("");
+
+    } else {
+      try {
+        const urlMovie = await movieTrailer(movie?.title || movie?.name || movie?.original_name || "");
+        setTrailerUrl(urlMovie);
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 
   return (
@@ -34,27 +54,33 @@ export default function MovieRow({ title, items }: Movie) {
       <h2>{title}</h2>
 
       <div className="movieRow--left" onClick={handleLeftArrow}>
-        <NavigateBeforeIcon style={{ fontSize: 50}} />
+        <NavigateBeforeIcon style={{ fontSize: 50 }} />
       </div>
 
       <div className="movieRow--right" onClick={handleRightArrow}>
-        <NavigateNextIcon style={{ fontSize: 50}} />
+        <NavigateNextIcon style={{ fontSize: 50 }} />
       </div>
 
       <div className="movieRow--listarea">
-        <div className="movieRow--list" 
-        style={{ 
-          marginLeft: scrollX,
-          width: items?.['results']?.length * 150
-        }}
+        <div className="movieRow--list"
+          style={{
+            marginLeft: scrollX,
+            width: items?.['results']?.length * 150
+          }}
         >
           {items?.["results"]?.length > 0 && items?.['results'].map((index, key) => (
             <div key={key} className="movieRow--item">
-              <img src={`https://image.tmdb.org/t/p/w300${index.poster_path}`} alt={index?.original_title} />
+              <img
+                onClick={async () => handleOnClick(index)}
+                src={`https://image.tmdb.org/t/p/w300${index.poster_path}`}
+                alt={index?.original_title}
+              />
             </div>
           ))}
         </div>
       </div>
+
+      {trailerUrl && <ReactPlayer url={trailerUrl} playing={true} />}
     </div>
   );
 }
