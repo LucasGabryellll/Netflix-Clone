@@ -82,8 +82,8 @@ export default function MovieRow({ title, items }: Movie) {
       </div>
 
       {trailerUrl && (
-        <div style={{ paddingLeft: 50 }}>
-          <ReactPlayer url={trailerUrl} playing={true} />
+        <div className="movieRow--video">
+          <ReactPlayer url={trailerUrl} playing={true} width={window.screen.width < 750 ? 390: 900} controls={true}/>
         </div>)
       }
     </div>

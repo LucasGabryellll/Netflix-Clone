@@ -58,9 +58,17 @@
   opacity: 1;
 }
 
+.movieRow--video {
+  padding: 20px;
+}
+
 @media (max-width: 760px) {
   .movieRow--left,
   .movieRow--right {
     opacity: 1;
+  }
+
+  .movieRow--video {
+    padding-left: 5px;
   }
 }
