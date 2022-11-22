@@ -35,12 +35,13 @@ export default function MovieRow({ title, items }: Movie) {
   }
 
   async function handleOnClick(movie: any) {
-    if (trailerUrl) {
+    const urlMovie = await movieTrailer(movie?.title || movie?.name || movie?.original_name || "");
+
+    if (trailerUrl && trailerUrl === urlMovie) {
       setTrailerUrl("");
 
     } else {
       try {
-        const urlMovie = await movieTrailer(movie?.title || movie?.name || movie?.original_name || "");
         setTrailerUrl(urlMovie);
 
       } catch (error) {
@@ -80,7 +81,11 @@ export default function MovieRow({ title, items }: Movie) {
         </div>
       </div>
 
-      {trailerUrl && <ReactPlayer url={trailerUrl} playing={true} />}
+      {trailerUrl && (
+        <div style={{ paddingLeft: 50 }}>
+          <ReactPlayer url={trailerUrl} playing={true} />
+        </div>)
+      }
     </div>
   );
 }
