@@ -6,9 +6,10 @@
   <img alt="GitHub language count" src=https://github.com/LucasGabryellll/Netflix-Clone/blob/main/imageProjeto/scroll.png>
 
 ## ⌛ Sobre o projeto:
- - O projeto apresenta inicialmente a tela com uma lista de filmes separados por categorias, e um Filme ou serie 
- que é escolhido aleatoriamente sempre que o usuario visitar a página. Permite também a visualização do trailer do filme
+ - O projeto apresenta inicialmente a tela com uma lista de filmes e séries separados por categorias, e um Filme ou serie 
+ que é escolhido aleatoriamente sempre que o usuario visitar a página que fica visível no detaque. Permite também a visualização do trailer do filme
  buscando o mesmo no youtube.
+ - Foi utilizado o banco de dados do The Movie, para buscar os filmes. O React JS para montagem do Frontend e Typescript.
 
 ## 🚀 Ferramentase e Tecnologias:
 Esse projeto foi desenvolvido com as seguintes tecnologias:
