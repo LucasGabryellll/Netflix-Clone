@@ -1,4 +1,5 @@
 # Clone da Página Home da Netflix  <img src="https://cdn-icons-png.flaticon.com/512/732/732228.png" width="30px"/>
+ - Projeto hospedado: https://nzflix.web.app/
 
 <p align="center">
   <img alt="GitHub language count" src=https://github.com/LucasGabryellll/Netflix-Clone/blob/main/imageProjeto/header.png>
